@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(mp VERSION 1.0.0)
+project(ez VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -39,4 +39,4 @@ else()
     )
 endif()
 
-add_subdirectory(mp)
+add_subdirectory(ez)

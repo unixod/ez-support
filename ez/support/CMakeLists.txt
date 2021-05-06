@@ -1,5 +1,5 @@
 add_library(support INTERFACE)
-add_library(mp::support ALIAS support)
+add_library(ez::support ALIAS support)
 
 target_include_directories(support
     INTERFACE

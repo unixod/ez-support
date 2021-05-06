@@ -1,6 +1,9 @@
+#ifndef EZ_SUPPORT_CPP23_FEATURES_H
+#define EZ_SUPPORT_CPP23_FEATURES_H
+
 #include <type_traits>
 
-namespace std23 {
+namespace ez::std23 {
 
 template<typename Enum>
 constexpr auto to_underlying(Enum e) noexcept
@@ -9,4 +12,6 @@ constexpr auto to_underlying(Enum e) noexcept
     return static_cast<std::underlying_type_t<Enum>>(e);
 }
 
-} // namespace std23
+} // namespace ez::std23
+
+#endif //EZ_SUPPORT_CPP23_FEATURES_H

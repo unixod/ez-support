@@ -15,6 +15,6 @@ TEST_CASE("std23::to_underlying")
 
     REQUIRE(i <=  std::numeric_limits<std::underlying_type_t<Enum>>::max());
 
-    REQUIRE(std23::to_underlying(Enum{i}) == i);
+    REQUIRE(ez::std23::to_underlying(Enum{i}) == i);
 }
 

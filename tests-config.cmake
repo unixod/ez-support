@@ -1,7 +1,7 @@
 include_guard()
 
 add_subdirectory(third-party/Catch2)
-add_library(mp::tests_config ALIAS Catch2WithMain)
+add_library(ez::tests_config ALIAS Catch2WithMain)
 
 list(APPEND CMAKE_MODULE_PATH
     ${CMAKE_SOURCE_DIR}/cmake)
