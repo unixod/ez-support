@@ -11,6 +11,7 @@ list(APPEND CMAKE_MODULE_PATH
 if(MSVC)
     target_compile_options(Catch2WithMain
         PUBLIC
+
         /EHsc
     )
 endif()
