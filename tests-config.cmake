@@ -1,6 +1,16 @@
 include_guard()
 
-add_subdirectory(third-party/Catch2)
+include(FetchContent)
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY git@github.com:unixod/Catch2.git
+    GIT_TAG fix-warnings
+    GIT_SHALLOW On
+)
+
+FetchContent_MakeAvailable(Catch2)
+
+#add_subdirectory(third-party/Catch2)
 add_library(ez::tests_config ALIAS Catch2WithMain)
 
 list(APPEND CMAKE_MODULE_PATH

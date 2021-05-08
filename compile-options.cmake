@@ -34,3 +34,5 @@ else()
         -Wsign-conversion
     )
 endif()
+
+target_compile_features(ez_compile_options INTERFACE cxx_std_20)

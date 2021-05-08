@@ -11,7 +11,7 @@ include(GNUInstallDirs)
 if (EZ_STANDALONE)
     include(CTest)
 
-    if (BUILD_TESTING AND EZ_STANDALONE)
+    if (BUILD_TESTING)
         include(tests-config.cmake)
     endif()
 endif()
