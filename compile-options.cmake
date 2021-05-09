@@ -10,7 +10,6 @@ add_library(ez::compile_options ALIAS ez_compile_options)
 if (MSVC)
     target_compile_options(ez_compile_options
         INTERFACE
-
         /EHsc
         /Wall
         /WX
@@ -18,14 +17,11 @@ if (MSVC)
 else()
     target_compile_options(ez_compile_options
         INTERFACE
-
         -Wall
         -Wcast-align
         -Wconversion
-        -Wctor-dtor-privacy
         -Werror
         -Wextra
-        -Wno-unknown-attributes
         -Wnon-virtual-dtor
         -Wold-style-cast
         -Woverloaded-virtual

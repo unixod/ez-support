@@ -1,11 +1,6 @@
 #include "ez/support/c++23-features.h"
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wctor-dtor-privacy"
 #include <catch2/catch_all.hpp>
 #include <catch2/generators/catch_generators_range.hpp>
-#pragma GCC diagnostic pop
-
 
 TEST_CASE("std23::to_underlying")
 {
