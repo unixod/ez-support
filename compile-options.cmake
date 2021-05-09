@@ -1,6 +1,8 @@
-#################################################
-# Common compile options
-#################################################
+##################################################
+# Define ez::support::compile_options - a target
+# representing a set of common compile options 
+# for a project.
+##################################################
 
 include_guard()
 
