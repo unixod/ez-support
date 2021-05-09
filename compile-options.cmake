@@ -4,18 +4,18 @@
 
 include_guard()
 
-add_library(ez_compile_options INTERFACE)
-add_library(ez::compile_options ALIAS ez_compile_options)
+add_library(ez_support_compile_options INTERFACE)
+add_library(ez::support::compile_options ALIAS ez_support_compile_options)
 
 if (MSVC)
-    target_compile_options(ez_compile_options
+    target_compile_options(ez_support_compile_options
         INTERFACE
         /EHsc
         /Wall
         /WX
     )
 else()
-    target_compile_options(ez_compile_options
+    target_compile_options(ez_support_compile_options
         INTERFACE
         -Wall
         -Wcast-align
@@ -31,4 +31,4 @@ else()
     )
 endif()
 
-target_compile_features(ez_compile_options INTERFACE cxx_std_20)
+target_compile_features(ez_support_compile_options INTERFACE cxx_std_20)
