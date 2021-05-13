@@ -15,6 +15,7 @@ if (MSVC)
         /EHsc
         /Wall
         /WX
+        /Zc:__cplusplus
     )
 else()
     target_compile_options(ez_support_compile_options
