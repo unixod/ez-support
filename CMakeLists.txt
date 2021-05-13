@@ -8,7 +8,7 @@ endif()
 
 include(GNUInstallDirs)
 
-include(${CMAKE_CURRENT_LIST_DIR}/compile-options.cmake)
+include(compile-options.cmake)
 
 add_library(ez_support INTERFACE)
 add_library(ez::support ALIAS ez_support)
@@ -26,7 +26,7 @@ if (EZ_SUPPORT_STANDALONE)
     include(CTest)
 
     if (BUILD_TESTING)
-        include(${CMAKE_CURRENT_LIST_DIR}/tests-config.cmake)
+        include(tests-config.cmake)
         add_subdirectory(tests)
     endif()
 endif()
