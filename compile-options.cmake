@@ -9,7 +9,7 @@ include_guard()
 add_library(ez_support_compile_options INTERFACE)
 add_library(ez::support::compile_options ALIAS ez_support_compile_options)
 
-if (MSVC)
+if(MSVC)
     target_compile_options(ez_support_compile_options
         INTERFACE
         /EHsc
@@ -17,7 +17,7 @@ if (MSVC)
         /WX
         /Zc:__cplusplus
     )
-else()
+elseif(EZ_SUPPORT_STANDALONE)
     target_compile_options(ez_support_compile_options
         INTERFACE
         -Wall
