@@ -1,2 +1,2 @@
-addTest("std23" c++23-features
+addTest("std23" std23
     LIBS ez::support ez::support::tests_config)
