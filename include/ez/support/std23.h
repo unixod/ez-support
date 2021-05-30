@@ -25,7 +25,7 @@ template<typename E>
 struct is_scoped_enum : std::false_type {};
 
 template<typename E>
-requires std::is_enum_v<E>
+    requires std::is_enum_v<E>
 struct is_scoped_enum<E> :
         std::negation<
             std::is_convertible<E, std::underlying_type_t<E>>
