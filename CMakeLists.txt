@@ -27,8 +27,6 @@ if(EZ_SUPPORT_STANDALONE AND NOT DEFINED CMAKE_CXX_STANDARD)
     set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
 
-option(EZ_SUPPORT_INSTALL "Enable installation of ez-support target" EZ_SUPPORT_STANDALONE)
-
 ##############################################################################
 # Setup ez::support target
 ##############################################################################
@@ -46,10 +44,16 @@ target_link_libraries(ez_support
     INTERFACE
     ez::support::compile_options)
 
-if(EZ_SUPPORT_INSTALL)
-    install(TARGETS ez_support)
-    install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-endif()
+install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS ez_support EXPORT ez-support)
+set_target_properties(ez_support
+    PROPERTIES
+    EXPORT_NAME support)
+
+install(EXPORT ez-support
+    NAMESPACE ez::
+    DESTINATION lib/ez
+    FILE support.cmake)
 
 ##############################################################################
 # Setup unit tests

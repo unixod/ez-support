@@ -37,3 +37,9 @@ else()
 endif()
 
 target_compile_features(ez_support_compile_options INTERFACE cxx_std_20)
+
+install(TARGETS ez_support_compile_options EXPORT ez-support)
+set_target_properties(ez_support_compile_options
+    PROPERTIES
+    EXPORT_NAME support_compile_options)
+
