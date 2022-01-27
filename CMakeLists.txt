@@ -38,13 +38,13 @@ add_library(ez::support ALIAS ez_support)
 target_include_directories(ez_support
     INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/include>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_link_libraries(ez_support
     INTERFACE
     ez::support::compile_options)
 
-install(DIRECTORY include DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(DIRECTORY include/ez TYPE INCLUDE)
 install(TARGETS ez_support EXPORT ez-support)
 set_target_properties(ez_support
     PROPERTIES
