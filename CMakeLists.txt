@@ -45,15 +45,15 @@ target_link_libraries(ez_support
     ez::support::compile_options)
 
 install(DIRECTORY include/ez TYPE INCLUDE)
-install(TARGETS ez_support EXPORT ez-support)
+install(TARGETS ez_support EXPORT ez-libs)
 set_target_properties(ez_support
     PROPERTIES
     EXPORT_NAME support)
 
-install(EXPORT ez-support
+install(EXPORT ez-libs
     NAMESPACE ez::
     DESTINATION lib/ez
-    FILE support.cmake)
+    FILE libs.cmake)
 
 ##############################################################################
 # Setup unit tests
