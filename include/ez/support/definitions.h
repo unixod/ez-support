@@ -1,6 +1,8 @@
 #ifndef EZ_SUPPORT_DEFINITIONS_H
 #define EZ_SUPPORT_DEFINITIONS_H
 
+#include <cassert>
+
 #define STRINGIFY1(x) #x
 #define STRINGIFY(x) STRINGIFY1(x)
 

@@ -6,6 +6,7 @@
 #define EZ_SUPPORT_CPP23_FEATURES_H
 
 #include <type_traits>
+#include "ez/support/definitions.h"
 
 namespace ez::support::std23 {
 
@@ -16,6 +17,11 @@ constexpr auto to_underlying(Enum e) noexcept
 {
     static_assert(std::is_enum_v<Enum>);
     return static_cast<std::underlying_type_t<Enum>>(e);
+}
+
+[[noreturn]] inline void unreachable()
+{
+    UNRECHABLE;
 }
 
 
