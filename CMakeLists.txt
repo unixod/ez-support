@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.23)
 
 project(ez-support
-    VERSION 1.0.0
+    VERSION 1.0.1
     LANGUAGES CXX
 )
 
@@ -35,17 +35,22 @@ include(compile-options.cmake)
 add_library(ez_support INTERFACE)
 add_library(ez::support ALIAS ez_support)
 
-target_include_directories(ez_support
+target_sources(ez_support
     INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+    FILE_SET HEADERS
+    BASE_DIRS include
+    FILES
+        include/ez/support/std23.h
+        include/ez/support/definitions.h
+)
 
 target_link_libraries(ez_support
     INTERFACE
     ez::support::compile_options)
 
-install(DIRECTORY include/ez TYPE INCLUDE)
-install(TARGETS ez_support EXPORT ez-libs)
+install(TARGETS ez_support EXPORT ez-libs
+    FILE_SET HEADERS)
+
 set_target_properties(ez_support
     PROPERTIES
     EXPORT_NAME support)
