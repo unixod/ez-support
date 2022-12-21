@@ -6,6 +6,7 @@ project(ez-support
 )
 
 include(GNUInstallDirs)
+include(CMakeDependentOption)
 
 ##############################################################################
 # Setup project general properties
@@ -14,23 +15,25 @@ include(GNUInstallDirs)
 # Check if this is a standalone project or included by other project
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(EZ_SUPPORT_STANDALONE On)
+    include(CTest)
 endif()
 
-# Although this library is supposed to be dependency free its unit tests
-# are based on Catch2 unit test framework. Specifying CMAKE_CXX_STANDARD
-# in the following block is necessary for correct building of and linking
-# with Catch2 and potentialy any other fetched dependency because they
-# need to be informed somehow about the C++ standard being used.
-if(EZ_SUPPORT_STANDALONE AND NOT DEFINED CMAKE_CXX_STANDARD)
+cmake_dependent_option(EZ_SUPPORT_INSTALL
+    "Generate an install target for ez::support" Off "NOT EZ_SUPPORT_STANDALONE" On)
+
+# C++ standard configuration
+if(CMAKE_CXX_STANDARD VERSION_LESS 20)
     set(CMAKE_CXX_STANDARD 20)
-    set(CMAKE_CXX_STANDARD_REQUIRED ON)
-    set(CMAKE_CXX_EXTENSIONS OFF)
 endif()
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+include(dependencies.cmake)
+include(compile-options.cmake)
 
 ##############################################################################
 # Setup ez::support target
 ##############################################################################
-include(compile-options.cmake)
 
 add_library(ez_support INTERFACE)
 add_library(ez::support ALIAS ez_support)
@@ -46,28 +49,30 @@ target_sources(ez_support
 
 target_link_libraries(ez_support
     INTERFACE
-    ez::support::compile_options)
+    ez::support::compile_options
+)
 
-install(TARGETS ez_support EXPORT ez-libs
-    FILE_SET HEADERS)
+if(EZ_SUPPORT_INSTALL)
+    install(TARGETS ez_support EXPORT ez-libs
+        FILE_SET HEADERS
+    )
 
-set_target_properties(ez_support
-    PROPERTIES
-    EXPORT_NAME support)
+    set_target_properties(ez_support
+        PROPERTIES
+        EXPORT_NAME support
+    )
 
-install(EXPORT ez-libs
-    NAMESPACE ez::
-    DESTINATION lib/ez
-    FILE libs.cmake)
+    install(EXPORT ez-libs
+        NAMESPACE ez::
+        DESTINATION lib/ez
+        FILE libs.cmake
+    )
+endif()
 
 ##############################################################################
 # Setup unit tests
 ##############################################################################
-if(EZ_SUPPORT_STANDALONE)
-    include(CTest)
-
-    if (BUILD_TESTING)
-        include(tests-config.cmake)
-        add_subdirectory(tests)
-    endif()
+if(EZ_SUPPORT_STANDALONE AND BUILD_TESTING)
+    include(tests-config.cmake)
+    add_subdirectory(tests)
 endif()
