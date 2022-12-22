@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.24)
 
 project(ez-support
     VERSION 1.0.1
@@ -18,12 +18,20 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     include(CTest)
 endif()
 
+# If ez-support is used by some outer project (e.g. via CMake FetchContent or add_subdirectory)
+# then don't register targets defined here to be installed until it is explicitelly requested by
+# the outer project by setting EZ_SUPPORT_INSTALL option to On.
 cmake_dependent_option(EZ_SUPPORT_INSTALL
     "Generate an install target for ez::support" Off "NOT EZ_SUPPORT_STANDALONE" On)
 
-# C++ standard configuration
-if(CMAKE_CXX_STANDARD VERSION_LESS 20)
-    set(CMAKE_CXX_STANDARD 20)
+# Require C++20 or higher.
+# Notes:
+# - CMAKE_CXX_STANDARD is for dependencies (for now it's only Catch2).
+# - cxx_std_${EZ_SUPPORT_CPP_MINIMUM_REQUIRED} (in compile-options.cmake) is for ez-support and for
+#   its consumers (i.e. dependent targets).
+set(EZ_SUPPORT_CPP_MINIMUM_REQUIRED 20)
+if(CMAKE_CXX_STANDARD VERSION_LESS ${EZ_SUPPORT_CPP_MINIMUM_REQUIRED})
+    set(CMAKE_CXX_STANDARD ${EZ_SUPPORT_CPP_MINIMUM_REQUIRED})
 endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -49,7 +57,7 @@ target_sources(ez_support
 
 target_link_libraries(ez_support
     INTERFACE
-    ez::support::compile_options
+    ez::support::public_compile_options
 )
 
 if(EZ_SUPPORT_INSTALL)
