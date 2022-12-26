@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(ez-support
-    VERSION 1.0.1
-    LANGUAGES CXX
-)
+project(ez-support)
 
 include(GNUInstallDirs)
 include(CMakeDependentOption)
@@ -38,6 +35,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(dependencies.cmake)
 include(compile-options.cmake)
+
+# Enable custom build configurations
+if (EZ_SUPPORT_STANDALONE)
+    ez_common_enable_build_profile_debug_with_ubasan()
+endif()
 
 ##############################################################################
 # Setup ez::support target
