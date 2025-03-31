@@ -1,5 +1,5 @@
 #include "ez/support/std23.h"
-#include <catch2/catch_all.hpp>
+#include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators_range.hpp>
 
 TEST_CASE("std23::to_underlying")
